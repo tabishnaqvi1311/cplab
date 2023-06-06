@@ -1,25 +1,26 @@
 #include <stdio.h>
-int main(){
 
-    int numberOfPrimesToPrint;
-    scanf("%d", &numberOfPrimesToPrint);
-    int count = 1;
+void primeSieve(int n){
+    int prime[100] = {0};
 
-    printf("2 ");
-    for(int i = 2; i <= numberOfPrimesToPrint; i++){
-        int isPrime = 0, fixedNum = i;
-        for(int j = 2; j < fixedNum; j++){
-            if(fixedNum%j==0){
-                isPrime = 0;
-                break;
+    for(int i = 2; i <= n; i++){
+        if(prime[i] == 0){
+            for(int j = i*i; j <= n; j+=i){
+                prime[j] = 1;
             }
-            isPrime = 1;
-        }
-        if(isPrime==1){
-            count++;
-            printf("%d ", fixedNum);
         }
     }
-    printf("\n%d", count);
+
+    for(int i = 2; i <=n; i++){
+        if(prime[i] == 0){
+            printf("%d ", i);
+        }
+    }
+}
+
+int main(){
+    int n;
+    scanf("%d", &n);
+    primeSieve(n);
     return 0;
 }
